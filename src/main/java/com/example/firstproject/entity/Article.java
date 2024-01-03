@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor //기본 생성자 추가 어노테이션
 @ToString
 @Entity
+@Getter
 public class Article {
     @Id
     @GeneratedValue
@@ -21,4 +23,6 @@ public class Article {
     private String title;
     @Column
     private String content;
+
+
 }
