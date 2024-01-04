@@ -9,14 +9,15 @@
     </tr>
     </thead>
     <tbody>
-{{#article}}
+    {{#article}}
         <tr>
             <th scope="row">{{id}}</th>
             <td>{{title}}</td>
             <td>{{content}}</td>
         </tr>
-{{/article}}
+    {{/article}}
     </tbody>
 </table>
+<a href="/articles/{{article.id}}/edit" class="btn btn-primary">Edit</a>
 <a href="/articles">Go to Article List</a>
 {{>layouts/footer}}

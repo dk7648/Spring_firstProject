@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
+
     @GetMapping("/articles/new")
     public String newArticleForm() {
         return "articles/new";
@@ -59,5 +60,25 @@ public class ArticleController {
         model.addAttribute("articleList", articleEntityList);
         //3. 뷰 페이지 설정하기
         return "articles/index";
+    }
+
+    @GetMapping("/articles/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+        model.addAttribute("article", articleEntity);
+        return "articles/edit";
+    }
+
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form) {// DTO 매개변수로 받기
+        log.info("======== [update] ========");
+        log.info(form.toString());
+        Article articleEntity = form.toEntity();
+        log.info(articleEntity.toString());
+        Article target = articleRepository.findById(articleEntity.getId()).orElse(null);
+        if (target != null) {
+            articleRepository.save(articleEntity);
+        }
+        return "redirect:/articles/" + articleEntity.getId();
     }
 }
