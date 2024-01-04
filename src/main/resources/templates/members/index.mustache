@@ -12,11 +12,10 @@
     {{#memberList}}
         <tr>
             <th scope="row">{{id}}</th>
-            <td>{{email}}</td>
+            <td> <a href="/members/{{id}}">{{email}}</a></td>
             <td>{{password}}</td>
         </tr>
     {{/memberList}}
     </tbody>
 </table>
-
 {{>layouts/footer}}

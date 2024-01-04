@@ -1,5 +1,5 @@
 {{>layouts/header}}
-
+{{#member}}
 <table class="table">
     <thead>
     <tr>
@@ -9,14 +9,16 @@
     </tr>
     </thead>
     <tbody>
-    {{#member}}
+
         <tr>
             <th scope="row">{{id}}</th>
             <td>{{email}}</td>
             <td>{{password}}</td>
         </tr>
-    {{/member}}
+
     </tbody>
 </table>
+<a href="/members/{{id}}/edit" class="btn btn-primary">Edit</a>
 <a href="/members">Go to Member List</a>
+{{/member}}
 {{>layouts/footer}}
