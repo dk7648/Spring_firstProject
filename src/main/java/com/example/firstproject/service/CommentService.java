@@ -47,4 +47,13 @@ public class CommentService {
         // 4. DTO로 변환해 반환
         return CommentDto.createCommentDto(created);
     }
+
+    @Transactional
+    public CommentDto update(Long id, CommentDto dto) {
+        Comment target = commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("댓글 수정 실패! 대상 댓글이 없습니다."));
+        target.patch(dto);
+        Comment updated = commentRepository.save(target);
+        return CommentDto.createCommentDto(updated);
+    }
 }
