@@ -20,13 +20,17 @@ public class CommentService {
     private ArticleRepository articleRepository;
 
     public List<CommentDto> comments(Long articleId) {
-        List<Comment> comments = commentRepository.findByArticleId(articleId);
-        List<CommentDto> dtos = new ArrayList<CommentDto>();
-        for(int i=0; i<comments.size(); i++) {
-            Comment c = comments.get(i);
-            CommentDto dto = CommentDto.createCommentDto(c);
-            dtos.add(dto);
-        }
-        return dtos;
+//        List<Comment> comments = commentRepository.findByArticleId(articleId);
+//        List<CommentDto> dtos = new ArrayList<CommentDto>();
+//        for(int i=0; i<comments.size(); i++) {
+//            Comment c = comments.get(i);
+//            CommentDto dto = CommentDto.createCommentDto(c);
+//            dtos.add(dto);
+//        }
+//        return dtos;
+        return commentRepository.findByArticleId(articleId)
+                .stream()
+                .map(comment->CommentDto.createCommentDto(comment))
+                .collect(Collectors.toList());
     }
 }
