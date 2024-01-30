@@ -15,6 +15,11 @@
                         data-bs-body="{{body}}"
                         data-bs-article-id="{{articleId}}">수정
                 </button>
+                <!-- 댓글 삭제 버튼 -->
+                <button type="button"
+                        class="btn btn-sm- btn-outline-danger comment-delete-btn"
+                        data-comment-id="{{id}}">삭제
+                </button>
                 <!-- Modal -->
                 <div class="modal fade" id="comment-edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
@@ -94,6 +99,38 @@
                             });
                         });
                     }
+                }
+                </script>
+
+                <script>
+                {
+                    const commentDeleteBtns = document.querySelectorAll(".comment-delete-btn");
+
+                    commentDeleteBtns.forEach(btn=> {
+                        btn.addEventListener("click", (event) => {
+                            const commentDeleteBtn = event.target;
+
+                            const commentId = commentDeleteBtn.getAttribute("data-comment-id");
+                            console.log(`삭제 버튼 클릭 : ${commentId}번 댓글`);
+
+                            const url = `/api/comments/${commentId}`;
+                            fetch(url, {
+                                method: "DELETE",
+                            }).then(response => {
+                                if(!response) {
+                                    alert("댓글 삭제 실패..!");
+                                    return;
+                                }
+                                const target = document.querySelector(`#comments-${commentId}`);
+                                target.remove();
+
+                                const msg = `${commentId}번 댓글을 삭제했습니다.`;
+                                alert(msg);
+
+                                window.location.reload();
+                            });
+                        });
+                    });
                 }
                 </script>
             </div>
